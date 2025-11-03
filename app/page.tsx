@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div className="">
-      <main className="">Google</main>
+    <div>
+      <main className="text-red-500 text-3xl">Google</main>
     </div>
   );
 }
