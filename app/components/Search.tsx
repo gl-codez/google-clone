@@ -5,7 +5,6 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { IoMdMic } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ImSpinner8 } from "react-icons/im";
 
 function Search() {
   const [input, setInput] = useState("");
@@ -19,11 +18,15 @@ function Search() {
   };
 
   const randomSearch = async () => {
-    setLoading(true);
-    const res = await fetch("https://random-word-api.herokuapp.com/word");
-    const data = await res.json();
-    if (!res.ok) return;
-    router.push(`/search?query=${data}`);
+    try {
+      setLoading(true);
+      const res = await fetch("https://random-word-api.herokuapp.com/word");
+      const data = await res.json();
+      if (!res.ok) return;
+      router.push(`/search?query=${data}`);
+    } catch (error) {
+      console.error(error);
+    }
     setLoading(false);
   };
 
@@ -54,8 +57,8 @@ function Search() {
         >
           {loading ? (
             <Image
-              width={20}
-              height={20}
+              width={50}
+              height={50}
               src="spinner.svg"
               alt="loading spinner"
               className="text-center h-5"
