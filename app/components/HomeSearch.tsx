@@ -6,7 +6,7 @@ import { IoMdMic } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-function Search() {
+function HomeSearch() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -14,7 +14,7 @@ function Search() {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-    router.push(`/search?query=${input}`);
+    router.push(`/search/query?=${input}`);
   };
 
   const randomSearch = async () => {
@@ -23,7 +23,7 @@ function Search() {
       const res = await fetch("https://random-word-api.herokuapp.com/word");
       const data = await res.json();
       if (!res.ok) return;
-      router.push(`/search?query=${data}`);
+      router.push(`/search/query?=${data}`);
     } catch (error) {
       console.error(error);
     }
@@ -73,4 +73,4 @@ function Search() {
   );
 }
 
-export { Search };
+export { HomeSearch };

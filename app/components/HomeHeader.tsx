@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
 
-function Header() {
+function HomeHeader() {
   return (
     <header className="flex justify-end p-5 text-sm">
       <div className="flex space-x-4 items-center">
@@ -26,4 +26,4 @@ function Header() {
   );
 }
 
-export { Header };
+export { HomeHeader };

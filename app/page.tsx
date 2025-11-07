@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Header } from "./components/Header";
-import { Search } from "./components/Search";
+import { HomeHeader } from "./components/HomeHeader";
+import { HomeSearch } from "./components/HomeSearch";
 
 export default function Home() {
   return (
     <div>
       <main>
-        <Header />
+        <HomeHeader />
         <div className="flex flex-col items-center mt-24">
           <Image
             src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png`}
@@ -16,7 +16,7 @@ export default function Home() {
             loading="eager"
             style={{ height: "auto", width: "auto" }}
           />
-          <Search />
+          <HomeSearch />
         </div>
       </main>
     </div>
