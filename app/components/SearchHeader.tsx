@@ -4,6 +4,8 @@ import { SearchBox } from "./SearchBox";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
 import { SearchHeaderOptions } from "./SearchHeaderOptions";
+import { Suspense } from "react";
+
 function SearchHeader() {
   return (
     <header className="stick top-0 bg-white">
@@ -25,7 +27,9 @@ function SearchHeader() {
         </div>
 
         <div className="flex-1 w-full">
-          <SearchBox />
+          <Suspense fallback={<p>Loading...</p>}>
+            <SearchBox />
+          </Suspense>
         </div>
         <div className="hidden md:flex space-x-2">
           <IoSettingsOutline className="header-icon" />
@@ -35,7 +39,9 @@ function SearchHeader() {
           Sign in
         </button>
       </div>
-      <SearchHeaderOptions />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SearchHeaderOptions />
+      </Suspense>
     </header>
   );
 }
