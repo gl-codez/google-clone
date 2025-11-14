@@ -20,10 +20,14 @@ function HomeSearch() {
   const randomSearch = async () => {
     try {
       setLoading(true);
-      const res = await fetch("https://random-word-api.herokuapp.com/word");
+      const res = await fetch("https://random-word-api.vercel.app/api?words=1");
       const data = await res.json();
+
       if (!res.ok) return;
-      router.push(`/search/web?query=${data}`);
+      const word = data[0];
+      if (!word) return;
+
+      router.push(`/search/web?query=${word}`);
     } catch (error) {
       console.error(error);
     }

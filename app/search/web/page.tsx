@@ -1,35 +1,33 @@
 import { WebSearchResult } from "@/app/components/WebSearchResult";
-import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function WebSearchPage({
   searchParams,
 }: {
   searchParams: Promise<{ query: string; start: string }>;
 }) {
-  const query = (await searchParams).query;
-  const startIndex = (await searchParams).start || "1";
+  const { query, start } = await searchParams;
+  const startIndex = start || "1";
+
+  if (!query) {
+    return null;
+  }
 
   const res = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${query}&start=${startIndex}`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${query}&start=${startIndex}`,
+    {
+      cache: "no-store",
+    }
   );
   if (!res.ok) {
+    console.log(res);
     throw new Error("Error fetching data");
   }
   const data = await res.json();
   const results = data.items;
 
   if (!results) {
-    return (
-      <div className="flex flex-col justify-center items-center pt-10">
-        <h1 className="text-3xl mb-4">No results found</h1>
-        <p className="text-lg">
-          Try searching for something else or go back to homepage{" "}
-          <Link href={"/"} className="text-blue-500">
-            Home
-          </Link>
-        </p>
-      </div>
-    );
+    return notFound();
   }
 
   return <>{results && <WebSearchResult results={data} />}</>;
