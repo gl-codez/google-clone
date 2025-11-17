@@ -2,12 +2,19 @@
 
 @layer components {
   .btn {
-    @apply bg-[#f8f9fa] rounded-md text-sm text-gray-800 hover:ring-1 hover:ring-gray-200 focus:outline-none active:ring-gray-300 w-35 h-10 hover:shadow-md transition-shadow;
+    @apply bg-[#f8f9fa] rounded-lg text-sm text-gray-800 hover:ring-1 hover:ring-gray-200 focus:outline-none active:ring-gray-300 w-35 h-10 hover:shadow-md transition-shadow;
+  }
+  .btn-dark {
+    @apply bg-gray-700/30 rounded-lg text-sm text-gray-200 hover:ring-1 hover:ring-gray-400/40 focus:outline-none active:ring-gray-200 w-35 h-10 hover:shadow-md transition-shadow;
   }
   .link {
     @apply hover:underline cursor-pointer;
   }
+
   .header-icon {
     @apply bg-transparent hover:bg-gray-200 text-4xl p-2 rounded-full cursor-pointer;
   }
+}
+.header-icon-2 {
+  @apply bg-transparent hover:bg-gray-700/50 text-4xl p-2 rounded-full cursor-pointer;
 }

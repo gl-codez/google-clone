@@ -1,9 +1,20 @@
+"use client";
+
 import { Suspense } from "react";
 import { CountryLookup } from "./CountryLookup";
+import { useTheme } from "next-themes";
 
 function Footer() {
+  const { resolvedTheme } = useTheme();
+  const bgColor = resolvedTheme === "dark" ? "bg-[#121212]" : "bg-[#f2f2f2]";
+  const textColor =
+    resolvedTheme === "dark" ? "text-gray-300" : "text-gray-400";
+
+  if (!resolvedTheme) return null;
   return (
-    <footer className="absolute bottom-0 text-sm text-gray-400 bg-[#f2f2f2] w-full">
+    <footer
+      className={`absolute bottom-0 text-sm ${textColor} ${bgColor} w-full`}
+    >
       <div className="border-b px-8 py-3">
         <Suspense fallback={<p>Loading...</p>}>
           <CountryLookup />

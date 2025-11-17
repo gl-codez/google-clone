@@ -8,12 +8,16 @@ import { SearchHeaderOptions } from "./SearchHeaderOptions";
 import { Suspense, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { useTheme } from "next-themes";
 
 function SearchHeader() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session } = useSession();
+  const { resolvedTheme } = useTheme();
+  const headerBg = resolvedTheme === "dark" ? "bg-[#121212]" : "bg-white";
+  const icon = resolvedTheme === "dark" ? "header-icon-2" : "header-icon";
 
   const handleSignIn = async () => {
     try {
@@ -34,8 +38,9 @@ function SearchHeader() {
       setIsSigningOut(false);
     }
   };
+
   return (
-    <header className="stick top-0 bg-white">
+    <header className={`stick top-0 ${headerBg}`}>
       <div className="flex flex-col md:flex-row w-full p-4 md:p-6 items-center md:justify-between space-y-4 md:space-y-0">
         <div className="flex w-full items-center justify-between md:w-auto">
           <Link href={"/"}>
@@ -99,7 +104,7 @@ function SearchHeader() {
           <ThemeSwitch />
           <CgMenuGridO
             onClick={() => setMenuOpen(!menuOpen)}
-            className="header-icon"
+            className={`${icon}`}
           />
         </div>
         {session?.user ? (

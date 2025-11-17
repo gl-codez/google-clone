@@ -5,12 +5,16 @@ import { CgMenuGridO } from "react-icons/cg";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
+import { useTheme } from "next-themes";
 
 function HomeHeader() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session } = useSession();
+  const { resolvedTheme } = useTheme();
+  const icon =
+    resolvedTheme === "dark" ? "header-icon-2" : "header-icon text-black";
 
   const handleSignIn = async () => {
     try {
@@ -50,7 +54,7 @@ function HomeHeader() {
         <div className="relative">
           <CgMenuGridO
             onClick={() => setMenuOpen(!menuOpen)}
-            className="bg-transparent text-black text-4xl hover:bg-gray-200 p-2 rounded-full cursor-pointer"
+            className={`${icon}`}
           />
 
           {menuOpen && (

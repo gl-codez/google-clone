@@ -7,9 +7,9 @@ function ThemeSwitch() {
   const { resolvedTheme, setTheme } = useTheme();
 
   if (!resolvedTheme) return null;
-
+  const icon = resolvedTheme === "dark" ? "header-icon-2" : "header-icon";
   return (
-    <div>
+    <div className={`${icon}`}>
       {resolvedTheme === "dark" ? (
         <MdLightMode
           className="text-gray-400 text-xl"

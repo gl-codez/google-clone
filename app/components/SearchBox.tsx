@@ -6,12 +6,15 @@ import { RxCross2 } from "react-icons/rx";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 function SearchBox() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("query");
   const router = useRouter();
   const [query, setQuery] = useState(searchQuery || "");
+  const { resolvedTheme } = useTheme();
+  const text = resolvedTheme === "dark" ? "text-blue-300" : "text-blue-700";
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -35,10 +38,12 @@ function SearchBox() {
         className="text-gray-500 text-2xl cursor-pointer sm:mr-2"
         onClick={() => setQuery("")}
       />
-      <IoMdMic className="hidden sm:inline-flex text-blue-500 text-4xl pl-4 border-l-2 border-gray-300 mr-3 cursor-pointer" />
+      <IoMdMic
+        className={`hidden sm:inline-flex ${text}  text-4xl pl-4 border-l-2 border-gray-300 mr-3 cursor-pointer`}
+      />
       <AiOutlineSearch
         onClick={handleSubmit}
-        className="text-2xl hidden sm:inline-flex text-blue-500 cursor-pointer"
+        className={`text-2xl hidden sm:inline-flex ${text} cursor-pointer`}
       />
     </form>
   );
