@@ -3,24 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchBox } from "./SearchBox";
-import { IoSettingsOutline } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
 import { SearchHeaderOptions } from "./SearchHeaderOptions";
 import { Suspense, useState } from "react";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { ThemeSwitch } from "./ThemeSwitch";
 
-interface Session {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-  } | null;
-}
-
-function SearchHeader({ session }: { session: Session | null }) {
+function SearchHeader() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   const handleSignIn = async () => {
     try {
@@ -103,7 +96,7 @@ function SearchHeader({ session }: { session: Session | null }) {
           </Suspense>
         </div>
         <div className="hidden md:flex items-center space-x-2">
-          <IoSettingsOutline className="header-icon" />
+          <ThemeSwitch />
           <CgMenuGridO
             onClick={() => setMenuOpen(!menuOpen)}
             className="header-icon"

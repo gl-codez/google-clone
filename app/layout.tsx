@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "next-themes";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Google",
@@ -15,10 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased relative min-h-screen">
+      <body className="relative min-h-screen">
         <ThemeProvider>
-          {children}
-          <Footer />
+          <SessionProvider>
+            {children}
+            <Footer />
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

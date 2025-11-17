@@ -2,22 +2,15 @@
 
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 
-interface Session {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-  } | null;
-}
-
-function HomeHeader({ session }: { session: Session | null }) {
+function HomeHeader() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   const handleSignIn = async () => {
     try {
