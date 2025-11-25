@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "Google",
+  title: "Google-clone",
   description: "Google clone created by create next app",
 };
 
