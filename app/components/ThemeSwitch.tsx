@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function ThemeSwitch() {
 
   return (
     <div className="">
-      {theme === "dark" ? (
+      {resolvedTheme === "dark" ? (
         <MdLightMode
           className="text-gray-400 text-4xl dark:hover:bg-gray-700/50 p-2 rounded-full cursor-pointer"
           onClick={() => setTheme("light")}
